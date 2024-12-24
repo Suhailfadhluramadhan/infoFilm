@@ -1,188 +1,155 @@
-// $.ajax({
-//     url: 'http://www.omdbapi.com/?apikey=3d3092b4&s=avengers',
-//     success: result => {
-//         const movies= result.Search;
-//         console.log(movies)
-//         let card=" "
-//         movies.forEach(e => {
-//             card+=` <div class="col-md-4 my-5">
-//             <div class="card">
-//                 <img src="${e.Poster}" class="card-img-top" alt="gambar ${e.Title}">
-//                 <div class="card-body">
-//                   <h5 class="card-title">${e.Title}</h5>
-//                   <h6 class="card-subtitle mb-2 text-body-secondary">${e.Year}</h6>
-//                   <a href="#" class="btn btn-primary modal-detail-button" data-bs-toggle="modal" data-bs-target="#indexmovieModal" data-imdbid="${e.imdbID}">show detail</a>
+const images = document.querySelectorAll('.tv-image');
+let currentImageIndex = 0;
 
-//                 </div>
-//               </div>
-//         </div>`
+// Menyembunyikan semua gambar kecuali yang aktif
+function showImage(index) {
+  images.forEach((image, i) => {
+    image.style.opacity = (i === index) ? '1' : '0';
+  });
+}
 
-//         });
-//         $('.movie-konten').html(card)
+// Fungsi untuk berganti gambar secara otomatis
+function changeImage() {
+  currentImageIndex = (currentImageIndex + 1) % images.length; // Pergi ke gambar berikutnya
+  showImage(currentImageIndex);
+}
 
-//         $('.modal-detail-button').on('click',function(){
-//             $.ajax({
-//             url: `http://www.omdbapi.com/?apikey=3d3092b4&i=` + $(this).data('imdbid'),
-//             success: e=>{
-//                 const move=`<div class="kontainer-fluid">
-//                 <div class="row">
-//                   <div class="col-md-3">
-//                     <img src="${e.Poster}" alt="">
-//                   </div>
-//                   <div class="col-md">
-//                     <ul class="list-group">
-//                       <li class="list-group-item"><h4>
-//                       ${e.Title} ${e.Year}
-//                       </h4></li>
-//                       <li class="list-group-item">A second item</li>
-//                       <li class="list-group-item">A third item</li>
-//                       <li class="list-group-item">A fourth item</li>
-//                       <li class="list-group-item">And a fifth one</li>
-//                     </ul>
-//                   </div>
-//                 </div>
-//               </div>`
-//               $('.modal-body').html(move)
-//             }
-//            })
+// Menampilkan gambar pertama
+showImage(currentImageIndex);
 
-//         });
-//     },
-//     Error: ()=>{
-//         console.log('error')
-//     }
+// Mengubah gambar setiap 3 detik
+setInterval(changeImage, 3000);
 
-// })
-
-// const buttonCari = document.getElementById("button-cari")
-// buttonCari.addEventListener('click',function(){
-//   const input= document.querySelector(".input-keyword")
-//   fetch('http://www.omdbapi.com/?apikey=3d3092b4&s='+ input.value)
-//   .then(Response=> Response.json())
-//   .then(e=>{
-//     const movie= e.Search;
-//     let card=" "
-//     movie.forEach(e => card+=cari(e));
-//     const konten= document.querySelector(".movie-konten")
-//     konten.innerHTML= card
-
-//     const detailBtn = document.querySelectorAll(".modal-detail-button");
-//     detailBtn.forEach(e=>{e.addEventListener('click',function(){
-
-//     fetch(`http://www.omdbapi.com/?apikey=3d3092b4&i=` + $(this).data('imdbid'))
-//       .then(Response=> Response.json())
-//       .then(e=> { const move= carde(e);
-
-//         const modalbody= document.querySelector(".modal-body");
-//         modalbody.innerHTML= move;
-//       })
-
-//       })
-//     })
-
-//   })
-// })
-
-const buttonCari = document.querySelector("#button-cari");
-buttonCari.addEventListener("click", async function () {
-  try {
-    const input = document.querySelector(".input-keyword");
-    const val = input.value;
-    const dataFilm = await etFilm(val);
-    updateui(dataFilm);
-  } catch (err) {
-    alert(err);
-  }
-});
-
-document.addEventListener("click", async function (e) {
-  try {
-    if (e.target.classList.contains("modal-detail-button")) {
-      const imdb = e.target.dataset.imdbid;
-      const ambil = await getImdb(imdb);
-      updatModal(ambil);
+document.addEventListener("DOMContentLoaded", function () {
+  const buttonCari = document.querySelector("#button-cari");
+  buttonCari.addEventListener("click", async function () {
+    try {
+      const input = document.querySelector(".input-keyword");
+      const val = input.value;
+      const dataFilm = await etFilm(val);
+      updateui(dataFilm);
+    } catch (err) {
+      alert(err);
     }
-  } catch (err) {
-    alert(err);
+  });
+
+  document.addEventListener("click", async function (e) {
+    try {
+      if (e.target.classList.contains("modal-detail-button")) {
+        const imdb = e.target.dataset.imdbid;
+        const ambil = await getImdb(imdb);
+        updatModal(ambil);
+      }
+    } catch (err) {
+      alert(err);
+    }
+  });
+
+  // Fungsi ambil film
+  function etFilm(val) {
+    return fetch("https://www.omdbapi.com/?apikey=3d3092b4&s=" + val)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((response) => {
+        if (response.Response === "False") {
+          throw new Error(response.Error);
+        }
+        return response.Search;
+      });
   }
-});
 
-//fungsi ambil film
-function etFilm(val) {
-  return fetch("https://www.omdbapi.com/?apikey=3d3092b4&s=" + val)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json();
-    })
-    .then((response) => {
-      if (response.Response === "False") {
-        throw new Error(response.Error);
-      }
-      return response.Search;
-    });
-}
+  function getImdb(id) {
+    return fetch("https://www.omdbapi.com/?apikey=3d3092b4&i=" + id)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("something went wrong");
+        }
+        return response.json();
+      })
+      .then((m) => {
+        if (m.Response === "False") {
+          throw new Error(m.Error);
+        }
+        return m;
+      });
+  }
 
-function getImdb(id) {
-  return fetch("https://www.omdbapi.com/?apikey=3d3092b4&i=" + id)
-    .then((response) => {
-      console.log(response);
-      if (!response.ok) {
-        throw new Error("something went wrong");
-      }
-      return response.json();
-    })
-    .then((m) => {
-      console.log(m);
-      if (m.Response === "False") {
-        throw new Error(m.Error);
-      }
-      return m;
-    });
-}
+  // Fungsi menampilkan
+  function updatModal(e) {
+    const move = carde(e);
+    const modalbody = document.querySelector(".modal-body");
+    modalbody.innerHTML = move;
+  }
 
-//fungsi menampilkan
-function updatModal(e) {
-  const move = carde(e);
-  const modalbody = document.querySelector(".modal-body");
-  modalbody.innerHTML = move;
-}
+  function updateui(i) {
+    let card = "";
+    i.forEach((e) => (card += cari(e)));
+    const konten = document.querySelector(".movie-konten");
+    konten.innerHTML = card;
+  }
 
-function updateui(i) {
-  let card = "";
-  i.forEach((e) => (card += cari(e)));
-  const konten = document.querySelector(".movie-konten");
-  konten.innerHTML = card;
-}
+  function cari(e) {
+    return `
+    <div class="col-md-4 my-5">
+      <div class="bg-amber shadow-lg  rounded-lg overflow-hidden bg-cyan-500" style="box-shadow: 10px 15px 5px rgba(245, 152, 211, 0.9);">
+        <img src="${e.Poster}" class="w-full" alt="gambar ${e.Title}">
+        <div class="p-4" style="background-color: rgba(245, 152, 211, 0.9);">
+          <h5 class="text-lg font-semibold">${e.Title}</h5>
+          <h6 class="text-sm text-gray-600 mb-2">${e.Year}</h6>
+          <a href="#" class="bg-blue-200 text-white px-3 py-2 rounded-md text-sm font-medium modal-detail-button" data-imdbid="${e.imdbID}">Show Details</a>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  }
 
-function cari(e) {
-  return `<div class="col-md-4 my-5">
-            <div class="card">
-                <img src="${e.Poster}" class="card-img-top" alt="gambar ${e.Title}">
-                <div class="card-body">
-                  <h5 class="card-title">${e.Title}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">${e.Year}</h6>
-                  <a href="#" class="btn btn-primary modal-detail-button" data-bs-toggle="modal" data-bs-target="#indexmovieModal" data-imdbid="${e.imdbID}">show detail</a>
+  function carde(e) {
+    return `<div class="container mx-auto p-4 border-solid border-2 border-black ">
+              <div class="flex flex-wrap">
+                <div class="w-full sm:w-1/3">
+                  <img src="${e.Poster}" alt="Poster ${e.Title}" class="w-full rounded-lg">
+                </div>
+                <div class="w-full sm:w-2/3 p-4">
+                  <ul class="list-none">
+                    <li class="py-2"><h4 class="text-xl font-bold">${e.Title} (${e.Year})</h4></li>
+                    <li class="py-2"><strong>Actors:</strong> ${e.Actors}</li>
+                    <li class="py-2"><strong>Writer:</strong> ${e.Writer}</li>
+                    <li class="py-2"><strong>Plot:</strong> ${e.Plot}</li>
+                  </ul>
                 </div>
               </div>
-        </div>`;
-}
+            </div>`;
+  }
 
-function carde(e) {
-  return `<div class="container-fluid">
-            <div class="row">
-              <div class="col-md-auto">
-                <img src="${e.Poster}" alt="" class="w-100">
-              </div>
-              <div class="col-md">
-                <ul class="list-group w-100">
-                  <li class="list-group-item"><h4>${e.Title} ${e.Year}</h4></li>
-                  <li class="list-group-item">${e.Actors}</li>
-                  <li class="list-group-item">${e.Writer}</li>
-                  <li class="list-group-item">${e.Plot}</li>
-                </ul>
-              </div>
-            </div>
-          </div>`;
-}
+  // Menutup modal dengan tombol
+  const modal = document.getElementById("indexmovieModal");
+  const modalCloseButton = document.getElementById("modal-close-button");
+  const modalCloseFooter = document.getElementById("modal-close-footer");
+
+  modalCloseButton.addEventListener("click", function () {
+    modal.classList.add("hidden");
+  });
+
+  modalCloseFooter.addEventListener("click", function () {
+    modal.classList.add("hidden");
+  });
+
+  // Event untuk menutup modal ketika klik di luar modal
+  window.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
+
+  // Event untuk membuka modal
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("modal-detail-button")) {
+      modal.classList.remove("hidden");
+    }
+  });
+});

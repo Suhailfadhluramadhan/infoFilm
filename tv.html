@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Slider</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Menambahkan efek transition untuk opacity */
+    .tv-image {
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section Home -->
+  <section class="home">
+    <div class="tv-container max-w-lg mx-auto my-16 p-4 rounded-xl bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600 shadow-xl">
+      <!-- Antena -->
+      <div class="tv-antenna absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-between items-center w-16 z-10">
+        <div class="w-1.5 h-16 bg-yellow-400 rounded-md"></div>
+        <div class="w-1.5 h-16 bg-pink-400 rounded-md"></div>
+      </div>
+
+      <!-- Layar TV -->
+      <div class="tv-screen w-full h-72 bg-black rounded-lg relative overflow-hidden">
+        <img src="ART.png" alt="TV Content 1" class="tv-image w-full h-full object-cover opacity-0 absolute">
+        <img src="p11.png" alt="TV Content 2" class="tv-image w-full h-full object-cover opacity-0 absolute">
+        <img src="baru.png" alt="TV Content 3" class="tv-image w-full h-full object-cover opacity-0 absolute">
+      </div>
+
+      <!-- Tombol kontrol TV -->
+      <div class="tv-controls absolute  left-1/2 transform -translate-x-1/2 flex justify-center space-x-4">
+        <button class="w-6 h-6 bg-yellow-300 rounded-full hover:bg-yellow-500"></button>
+        <button class="w-6 h-6 bg-pink-300 rounded-full hover:bg-pink-500"></button>
+        <button class="w-6 h-6 bg-green-300 rounded-full hover:bg-green-500"></button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const images = document.querySelectorAll('.tv-image');
+    let currentImageIndex = 0;
+
+    // Menyembunyikan semua gambar kecuali yang aktif
+    function showImage(index) {
+      images.forEach((image, i) => {
+        image.style.opacity = (i === index) ? '1' : '0';
+      });
+    }
+
+    // Fungsi untuk berganti gambar secara otomatis
+    function changeImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length; // Pergi ke gambar berikutnya
+      showImage(currentImageIndex);
+    }
+
+    // Menampilkan gambar pertama
+    showImage(currentImageIndex);
+
+    // Mengubah gambar setiap 3 detik
+    setInterval(changeImage, 3000);
+  </script>
+
+</body>
+</html>
