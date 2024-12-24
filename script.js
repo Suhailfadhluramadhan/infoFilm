@@ -1,23 +1,19 @@
 const images = document.querySelectorAll('.tv-image');
 let currentImageIndex = 0;
 
-// Menyembunyikan semua gambar kecuali yang aktif
 function showImage(index) {
   images.forEach((image, i) => {
     image.style.opacity = (i === index) ? '1' : '0';
   });
 }
 
-// Fungsi untuk berganti gambar secara otomatis
 function changeImage() {
-  currentImageIndex = (currentImageIndex + 1) % images.length; // Pergi ke gambar berikutnya
+  currentImageIndex = (currentImageIndex + 1) % images.length;
   showImage(currentImageIndex);
 }
 
-// Menampilkan gambar pertama
 showImage(currentImageIndex);
 
-// Mengubah gambar setiap 3 detik
 setInterval(changeImage, 3000);
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -45,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Fungsi ambil film
   function etFilm(val) {
     return fetch("https://www.omdbapi.com/?apikey=3d3092b4&s=" + val)
       .then((response) => {
@@ -78,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Fungsi menampilkan
   function updatModal(e) {
     const move = carde(e);
     const modalbody = document.querySelector(".modal-body");
@@ -105,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
   `;
-  
   }
 
   function carde(e) {
@@ -126,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>`;
   }
 
-  // Menutup modal dengan tombol
   const modal = document.getElementById("indexmovieModal");
   const modalCloseButton = document.getElementById("modal-close-button");
   const modalCloseFooter = document.getElementById("modal-close-footer");
@@ -139,14 +131,12 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.classList.add("hidden");
   });
 
-  // Event untuk menutup modal ketika klik di luar modal
   window.addEventListener("click", function (e) {
     if (e.target === modal) {
       modal.classList.add("hidden");
     }
   });
 
-  // Event untuk membuka modal
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("modal-detail-button")) {
       modal.classList.remove("hidden");
