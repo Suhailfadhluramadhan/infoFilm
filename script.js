@@ -156,6 +156,7 @@ var mySwiper = new Swiper('.swiper-container', {
   speed: 1000,
   autoplay: {
     delay: 2000,
+    disableOnInteraction: false,
   },
   effect: 'coverflow',
   grabCursor: true,
