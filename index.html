@@ -6,8 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Latihan API</title>
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  <style>
+    .btns {
+      box-shadow: 10px 10px 5px rgb(13, 26, 30);
+    }
 
+    .btns:hover {
+      box-shadow: 1px 1px 10px rgb(13, 26, 30);
+    }
+
+    .gbr-genre {
+      display: flex;
+
+      white-space: nowrap;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+
+    .gbr-genre img {
+      width: 12rem;
+      /* Atur lebar gambar */
+      height: 20rem;
+      /* Atur tinggi gambar */
+      object-fit: cover;
+      margin-left: -3rem;
+      /* Memberikan efek tumpang tindih */
+      margin-right: -3rem;
+      /* Memberikan efek tumpang tindih */
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .gbr-genre img:first-child {
+      margin-left: 0;
+      /* Hapus margin kiri pada gambar pertama */
+    }
+
+    .gbr-genre img:last-child {
+      margin-right: 0;
+      /* Hapus margin kanan pada gambar terakhir */
+    }
+
+    .gbr-genre img:hover {
+      transform: scale(1.05);
+      /* Efek zoom saat hover */
+    }
+  </style>
+</head>
 <header class="flex justify-center items-center">
   <nav class="navbar flex items-center rounded-xl bg-black p-4 mt-2 w-4/5"
     style="box-shadow: 20px 20px 5px rgb(13, 26, 30); border: 1px solid whitesmoke;">
@@ -15,61 +59,111 @@
       <img src="p11.png" alt="MySite Logo" class="h-10">
     </div>
     <ul class="nav-links flex space-x-6 mx-auto">
-      <li><a href="#home" class="text-white text-xl hover:text-red">Home</a></li>
-      <li><a href="#search" class="text-white text-xl hover:text-gray-400">About</a></li>
-      <li><a href="#" class="text-white text-xl hover:text-gray-400">Services</a></li>
-      <li><a href="#" class="text-white text-xl hover:text-gray-400">Contact</a></li>
+      <li><a href="#Home" class="text-white text-xl hover:text-red font-serif">Home</a></li>
+      <li><a href="#Playlist" class="text-white text-xl hover:text-gray-400 font-serif">Playlist</a></li>
+      <li><a href="#" class="text-white text-xl hover:text-gray-400 font-serif">Services</a></li>
+      <li><a href="#" class="text-white text-xl hover:text-gray-400 font-serif">Contact</a></li>
     </ul>
   </nav>
 </header>
 
-<body class="bg-gray-200 text-gray-900">
+<body class="bg-white text-gray-900">
   <section id="Home">
-    <div class="tv-container max-w-lg mx-auto my-16 p-4 rounded-xl bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600 shadow-xl">
-      <div class="tv-screen w-full h-72 bg-black rounded-lg relative overflow-hidden">
-        <img src="image1.png" alt="TV Content 1" class="tv-image w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out">
-        <img src="image2.png" alt="TV Content 2" class="tv-image w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out">
-        <img src="image.png" alt="TV Content 3" class="tv-image w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out">
+    <div class="flex justify-evenly items-center pt-20 pb-20">
+      <div class="konten-tv w-2/5  p-4 ">
+        <div class="mb-9  p-3 ">
+          <h1 class="text-black text-3xl font-bold">Explore the limitless world of movies with <span class="font-serif"
+              style="color: rgb(207, 53, 230);">Sfr Katalog Film</span></h1>
+          <p class="text-black mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint beatae ut iusto rerum
+            ratione temporibus laborum vitae qui recusandae officiis! Enim modi provident alias, minima delectus
+            cupiditate eaque nisi officia. Ad perspiciatis quod aliquam reprehenderit voluptas suscipit numquam ea,
+            error, veniam, ex maiores.</p>
+          <button class="btns bg-cyan-600  text-white  mt-5 py-2 px-4 rounded inline-flex items-center font-serif ">
+            <img src="logo.png" alt="Logo" class="w-10 h-5 mr-2 ">
+            Show more
+          </button>
+
+
+        </div>
       </div>
-      <div class="tv-controls absolute left-1/2 transform -translate-x-1/2 flex justify-center space-x-4">
-        <button class="w-6 h-6 bg-yellow-300 rounded-full hover:bg-yellow-500"></button>
-        <button class="w-6 h-6 bg-pink-300 rounded-full hover:bg-pink-500"></button>
-        <button class="w-6 h-6 bg-green-300 rounded-full hover:bg-green-500"></button>
+      <div class="tv-container w-1/2 max-w-xl p-3  rounded-xl h-fit"
+        style="background-color: rgba(91, 139, 128, 0.9); box-shadow: 10px 10px 0px rgba(36, 42, 41, 0.9); border: 1px solid black">
+        <div class="tv-screen w-full h-72 bg-black rounded-lg relative overflow-hidden">
+          <img src="download.jpeg" alt="TV Content 1"
+            class="tv-image w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out">
+          <img src="image2.png" alt="TV Content 2"
+            class="tv-image w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out">
+          <img src="image.png" alt="TV Content 3"
+            class="tv-image w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out">
+        </div>
+        <div class="tv-controls flex justify-center space-x-4 my-5">
+          <button class="w-6 h-6 bg-yellow-300 rounded-full hover:bg-yellow-500"></button>
+          <button class="w-6 h-6 bg-pink-300 rounded-full hover:bg-pink-500"></button>
+          <button class="w-6 h-6 bg-green-300 rounded-full hover:bg-green-500"></button>
+        </div>
       </div>
     </div>
   </section>
-  <section id="search"></section>
-  <div id="konten" class="container mx-auto p-4">
-    <div class="row mt-5">
-      <div class="col">
-        <h1 class="text-3xl font-bold">Bioskop Mini</h1>
-      </div>
-      <div class="input-group mb-3 flex">
-        <input type="text" class="form-control input-keyword p-2 rounded-l-md border border-gray-300 flex-grow"
-          placeholder="search movie(cth:dilan)" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-primary color p-2 bg-blue-500 text-white rounded-r-md" type="button"
-          id="button-cari">Search</button>
-      </div>
-    </div>
-    <div class="row movie-konten grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    </div>
-  </div>
 
-  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" id="indexmovieModal">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl">
-      <div class="flex justify-between items-center p-4 border-b">
-        <h2 class="text-xl font-bold" id="indexmovieModalLabel">Info Movie</h2>
-        <button type="button" class="text-gray-500 hover:text-gray-700" id="modal-close-button">&times;</button>
+
+  <section id="Playlist">
+
+    <div class="genre-romance p-5">
+      <div class="judul-genre mb-4">
+        <button class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+          Click Me
+        </button>
       </div>
-      <div class="modal-body p-4">
-      </div>
-      <div class="flex justify-end p-4 border-t">
-        <button type="button" class="bg-gray-500 text-white p-2 rounded-md" id="modal-close-footer">Close</button>
-        <button type="button" class="bg-blue-500 text-white p-2 ml-2 rounded-md">Save changes</button>
+      <div class="gbr-genre w-full h-fit overflow-x-scroll whitespace-nowrap border border-gray-300 rounded-lg">
+        <img src="aset/movie/m1.jpeg" alt="Image 1" class="inline-block   w-48 h-80 mx-4">
+        <img src="aset/movie/m2.jpeg" alt="Image 2" class="inline-block h-80 w-48">
+        <img src="aset/movie/m3.jpeg" alt="Image 3" class="inline-block h-80 w-48 mx-4">
+        <img src="aset/movie/m4.jpeg" alt="Image 4" class="inline-block h-80 w-48">
+        <img src="aset/movie/m5.jpeg" alt="Image 5" class="inline-block h-80 w-48 mx-4">
+        <img src="aset/movie/m6.jpeg" alt="Image 6" class="inline-block h-80 w-48">
+        <img src="aset/movie/m6.jpeg" alt="Image 7" class="inline-block h-80 w-48 mx-4">
+        <img src="aset/movie/m7.jpeg" alt="Image 8" class="inline-block h-80 w-48">
+        <img src="aset/movie/m9.jpeg" alt="Image 4" class="inline-block h-80 w-48 mx-4">
       </div>
     </div>
-  </div>
 
+  </section>
+
+  <section id="search">
+    <div id="konten" class="container mx-auto p-4 ">
+      <div class="row mt-5">
+        <div class="col">
+          <h1 class="text-3xl font-bold">Bioskop Mini</h1>
+        </div>
+        <div class="input-group mb-3 flex">
+          <input type="text" class="form-control input-keyword p-2 rounded-l-md border border-gray-300 flex-grow"
+            placeholder="search movie(cth:dilan)" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-primary color p-2 bg-blue-500 text-white rounded-r-md" type="button"
+            id="button-cari">Search</button>
+        </div>
+      </div>
+      <div class="row movie-konten grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      </div>
+    </div>
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" id="indexmovieModal">
+      <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl">
+        <div class="flex justify-between items-center p-4 border-b">
+          <h2 class="text-xl font-bold" id="indexmovieModalLabel">Info Movie</h2>
+          <button type="button" class="text-gray-500 hover:text-gray-700" id="modal-close-button">&times;</button>
+        </div>
+        <div class="modal-body p-4">
+        </div>
+        <div class="flex justify-end p-4 border-t">
+          <button type="button" class="bg-gray-500 text-white p-2 rounded-md" id="modal-close-footer">Close</button>
+          <button type="button" class="bg-blue-500 text-white p-2 ml-2 rounded-md">Save changes</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 

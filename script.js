@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cari(e) {
     return `
     <div class="col-md-4 my-5">
-      <div class="bg-amber shadow-lg  rounded-lg overflow-hidden bg-cyan-500" style="box-shadow: 10px 15px 5px rgba(245, 152, 211, 0.9);">
+      <div class="bg-amber shadow-lg  rounded-lg overflow-hidden bg-cyan-500" style="box-shadow: 10px 15px 5px rgba(51, 43, 48, 0.9); ">
         <img src="${e.Poster}" class="w-full" alt="gambar ${e.Title}">
         <div class="p-4" style="background-color: rgba(245, 152, 211, 0.9);">
           <h5 class="text-lg font-semibold">${e.Title}</h5>
@@ -142,4 +142,29 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.remove("hidden");
     }
   });
+});
+
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("modal-detail-button")) {
+    e.preventDefault(); 
+    modal.classList.remove("hidden");
+  }
+});
+
+var TrandingSlider = new Swiper('.tranding-slider', {
+  effect: 'slide',  // Gunakan efek slide untuk kontrol yang lebih sederhana
+  grabCursor: true,
+  centeredSlides: false,  // Mengubah agar gambar tidak selalu terpusat
+  loop: true,
+  slidesPerView: 'auto',  // Menampilkan gambar berdasarkan lebar aslinya
+  spaceBetween: -30,  // Mengurangi ruang antara gambar (untuk efek tumpang tindih)
+  slideToClickedSlide: true,  // Memungkinkan untuk mengklik gambar dan langsung beralih
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
 });
