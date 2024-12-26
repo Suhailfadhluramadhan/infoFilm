@@ -151,18 +151,24 @@ document.addEventListener("click", function (e) {
   }
 });
 
-var TrandingSlider = new Swiper('.tranding-slider', {
-  effect: 'slide',  // Gunakan efek slide untuk kontrol yang lebih sederhana
-  grabCursor: true,
-  centeredSlides: false,  // Mengubah agar gambar tidak selalu terpusat
+var mySwiper = new Swiper('.swiper-container', {
   loop: true,
-  slidesPerView: 'auto',  // Menampilkan gambar berdasarkan lebar aslinya
-  spaceBetween: -30,  // Mengurangi ruang antara gambar (untuk efek tumpang tindih)
-  slideToClickedSlide: true,  // Memungkinkan untuk mengklik gambar dan langsung beralih
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
+  speed: 1000,
+  autoplay: {
+    delay: 2000,
   },
+  effect: 'coverflow',
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 80,
+    depth: 200,
+    modifier: 1,
+    slideShadows: false,
+  },
+  // Navigation arrows
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',

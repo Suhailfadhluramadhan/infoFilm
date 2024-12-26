@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Latihan API</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
   <style>
     .btns {
       box-shadow: 10px 10px 5px rgb(13, 26, 30);
@@ -14,42 +15,17 @@
     .btns:hover {
       box-shadow: 1px 1px 10px rgb(13, 26, 30);
     }
-
-    .gbr-genre {
-      display: flex;
-
-      white-space: nowrap;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
+    
+    .swiper-slide {
+      width: 200px;
+    }
+    .swiper-slide img {
+      width: 100%; /* Pastikan gambar mengisi slide */
+      border-radius: 10px; 
+      box-shadow: 20px 20px 5px rgb(13, 26, 30);
+      /* Tambahkan border-radius jika diinginkan */
     }
 
-    .gbr-genre img {
-      width: 12rem;
-      /* Atur lebar gambar */
-      height: 20rem;
-      /* Atur tinggi gambar */
-      object-fit: cover;
-      margin-left: -3rem;
-      /* Memberikan efek tumpang tindih */
-      margin-right: -3rem;
-      /* Memberikan efek tumpang tindih */
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .gbr-genre img:first-child {
-      margin-left: 0;
-      /* Hapus margin kiri pada gambar pertama */
-    }
-
-    .gbr-genre img:last-child {
-      margin-right: 0;
-      /* Hapus margin kanan pada gambar terakhir */
-    }
-
-    .gbr-genre img:hover {
-      transform: scale(1.05);
-      /* Efek zoom saat hover */
-    }
   </style>
 </head>
 <header class="flex justify-center items-center">
@@ -113,20 +89,38 @@
         <button class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
           Click Me
         </button>
-      </div>
-      <div class="gbr-genre w-full h-fit overflow-x-scroll whitespace-nowrap border border-gray-300 rounded-lg">
-        <img src="aset/movie/m1.jpeg" alt="Image 1" class="inline-block   w-48 h-80 mx-4">
-        <img src="aset/movie/m2.jpeg" alt="Image 2" class="inline-block h-80 w-48">
-        <img src="aset/movie/m3.jpeg" alt="Image 3" class="inline-block h-80 w-48 mx-4">
-        <img src="aset/movie/m4.jpeg" alt="Image 4" class="inline-block h-80 w-48">
-        <img src="aset/movie/m5.jpeg" alt="Image 5" class="inline-block h-80 w-48 mx-4">
-        <img src="aset/movie/m6.jpeg" alt="Image 6" class="inline-block h-80 w-48">
-        <img src="aset/movie/m6.jpeg" alt="Image 7" class="inline-block h-80 w-48 mx-4">
-        <img src="aset/movie/m7.jpeg" alt="Image 8" class="inline-block h-80 w-48">
-        <img src="aset/movie/m9.jpeg" alt="Image 4" class="inline-block h-80 w-48 mx-4">
-      </div>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="aset/movie/m1.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="aset/movie/m2.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="aset/movie/m4.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="aset/movie/m5.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="aset/movie/m6.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="aset/movie/m7.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="aset/movie/m8.jpeg" alt="">
+            </div>
+            <div class="swiper-slide">
+            <img src="aset/movie/m9.jpeg" alt="">
+            </div>
+          </div>
+          
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
     </div>
-
   </section>
 
   <section id="search">
@@ -165,6 +159,7 @@
 
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
+ 
 </body>
 
 </html>
