@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return `
     <div class="col-md-4 my-5">
       <div class="bg-amber shadow-lg  rounded-lg overflow-hidden bg-cyan-500" style="box-shadow: 10px 15px 5px rgba(51, 43, 48, 0.9); ">
-        <img src="${e.Poster}" class="w-full" alt="gambar ${e.Title}">
+        <img src="${e.Poster}" class="w-full h-96" alt="gambar ${e.Title}">
         <div class="p-4" style="background-color: rgba(245, 152, 211, 0.9);">
           <h5 class="text-lg font-semibold">${e.Title}</h5>
           <h6 class="text-sm text-gray-600 mb-2">${e.Year}</h6>

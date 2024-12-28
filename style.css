@@ -250,3 +250,12 @@
   .tranding-slider-control .swiper-pagination .swiper-pagination-bullet-active {
     background: var(--primary);
   }
+
+  @keyframes fade {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
